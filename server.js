@@ -59,7 +59,7 @@ connection.connect(function(err) {
                 case "Add a Role":
                     addRole();
                     break;
-                case "Update an Employee Role":
+                case "Update an Employee Role",
                     updateRole():
                     break;
                 case "Exit":
