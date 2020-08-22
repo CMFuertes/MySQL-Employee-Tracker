@@ -59,7 +59,7 @@ connection.connect(function(err) {
                 case "Add a Role":
                     addRole();
                     break;
-                case "Update an Employee Role",
+                case "Update an Employee Role":
                     updateRole():
                     break;
                 case "Exit":
@@ -162,12 +162,12 @@ function viewRoles() {
         {
             name: "new_dept",
             type: "input",
-            message: "What is the name of the new deparment?"
+            message: "What is the name of the new department?"
         }
     ])
     .then(function (answer) {
         connection.query(
-            "INSERT INTO deparment SET ?",
+            "INSERT INTO department SET ?",
             {
                 name: answer.new_dept
             }
@@ -233,11 +233,11 @@ function viewRoles() {
 
 function updateRole (){
     var roleQuery = "SELECT * FROM role;";
-    var deparmentQuery = "SELECT * FROM deparment;";
+    var departmentQuery = "SELECT * FROM department;";
 
     connection.query(roleQuery, function (err, roles) {
         if (err) throw err;
-    connection.query(deparmentQuery, function (err, departments){
+    connection.query(departmentQuery, function (err, departments){
         if (err) throw err;
         inquirer.prompt([
             {
@@ -263,7 +263,7 @@ function updateRole (){
                 choices: function() {
                     var deptArray = [];
                     for (var i = 0; i < roles.length; i++){
-                        deptArray.push(deparments[i].name);
+                        deptArray.push(departments[i].name);
                     }
                     return deptArray;
                 },
@@ -271,8 +271,8 @@ function updateRole (){
             },
         ]).then (function (result) {
             for (var i = 0; i < departments.length; i++) {
-                if (deparments[i].name === result.deparment) {
-                    result.deparment_id = deparments[i].id;
+                if (departments[i].name === result.department) {
+                    result.department_id = departments[i].id;
                 }
             }
             connection.query("UPDATE role SET title=?,salary= ? WHERE department_id= ?", [
