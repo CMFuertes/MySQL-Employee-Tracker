@@ -66,7 +66,7 @@ connection.connect(function(err) {
                     updateRole():
                     break;
                 case "Exit":
-                    connection.end();
+                    exit();
                     break;
           }
       })
@@ -240,7 +240,7 @@ function updateRole (){
 
     connection.query(roleQuery, function (err, roles) {
         if (err) throw err;
-    connection.query(departmentQuery, function (err, departments){
+    connection.query(departmentQuery, function (err, department){
         if (err) throw err;
         inquirer.prompt([
             {
@@ -248,8 +248,8 @@ function updateRole (){
                 type: "rawlist", 
                 choices: function () {
                     var roleArray = [];
-                    for (var i = 0; i < roles.length; i++){
-                        roleArray.push(roles[i].title);
+                    for (var i = 0; i < role.length; i++){
+                        roleArray.push(role[i].title);
                     }
                     return roleArray;
                 },
@@ -266,16 +266,16 @@ function updateRole (){
                 choices: function() {
                     var deptArray = [];
                     for (var i = 0; i < roles.length; i++){
-                        deptArray.push(departments[i].name);
+                        deptArray.push(department[i].name);
                     }
                     return deptArray;
                 },
                 message: "Which department does this role belong to?"
             },
         ]).then (function (result) {
-            for (var i = 0; i < departments.length; i++) {
-                if (departments[i].name === result.department) {
-                    result.department_id = departments[i].id;
+            for (var i = 0; i < department.length; i++) {
+                if (department[i].name === result.department) {
+                    result.department_id = department[i].id;
                 }
             }
             connection.query("UPDATE role SET title=?,salary= ? WHERE department_id= ?", [
@@ -291,3 +291,7 @@ function updateRole (){
     })
 })
 }
+
+function exit() {
+    connection.end();
+  }
