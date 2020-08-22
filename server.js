@@ -73,13 +73,13 @@ connection.connect(function(err) {
 
   function addEmployee () {
     //   console.log("adding an employee");
-    coconnection.query("SELECT * FROM role", function (err, res) {
+    connection.query("SELECT * FROM role", function (err, res) {
         if (err) throw err;
         inquirer.prompt([
             {
             name: "first_name",
             type: "input",
-            message: "What is the empployee's first name?",
+            message: "What is the employee's first name?",
             },
             {
             name: "last_name",
