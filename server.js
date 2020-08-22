@@ -86,7 +86,40 @@ connection.connect(function(err) {
             type: "input", 
             message: "What is the employee's last name?"
             },
-
+            {
+            name: "role",
+            type: "list",
+            choices: function() {
+                var roleArray = [];
+                for (var i = 0; i < res.length; i++) {
+                    roleArray.push(res[i].title);
+                }
+                return roleArray;
+            },
+            message: "What is the employee's role?"
+            },
         ])
+        .then(function (answer) {
+            var roleID;
+            for (var i = 0; i < res.length; i++) {
+                if (res[i].title == answer.role) {
+                    roleID = res[i].id;
+                    console.log(roleID)
+                }
+            }
+            connection.query(
+                "INSERT INTO employee SET ?", 
+                {
+                    first_name: answer.first_name,
+                    last_name: answer.last_name,
+                    role_id: roleID, 
+                },
+                function (err) {
+                    if (err) throw err;
+                    console.log("New Employee has been added.");
+                    startApp();
+                }
+            )
+        })
     })
   }
