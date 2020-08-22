@@ -23,7 +23,7 @@ connection.connect(function(err) {
   });
 
   //intial prompt and switch cases, depending on selection
-  const startApp = () => {
+  function startApp () {
       inquirer
       .prompt({
           name: "selection",
@@ -47,6 +47,9 @@ connection.connect(function(err) {
                 case "View All Departments":
                     viewDepartments();
                     break;
+                case "View All Roles":
+                    viewRoles ();
+                    break;
                 case "Add an Employee",
                     addEmployee():
                     break;
@@ -67,9 +70,36 @@ connection.connect(function(err) {
   //functions
 
 
-//   function viewEmployees(){
-//       console.log("You are viewing employees! oh wow!");
-//   }
+  function viewEmployees() {
+      console.log("You are viewing employees! oh wow!");
+  	var query = "SELECT * FROM employee";
+    connection.query(query, (err, res) => {
+    if (err) throw err;
+    console.log(`You are viewing ${res.length} employees`);
+    console.table("All Employees:", res); 
+    startApp();
+    })
+}
+
+function viewDepartments() {
+	// console.log("You are viewing departments");
+    connection.query("SELECT * FROM department", (err, res) => {
+    if (err) throw err;
+    console.log(`You are viewing ${res.length} departments`);
+    console.table("All Departments:", res); 
+    startApp();
+    })
+}
+
+function viewRoles() {
+	// console.log("You are viewing roles");
+    connection.query("SELECT * FROM role", (err, res) => {
+    if (err) throw err;
+    console.log(`You are viewing ${res.length} roles`);
+    console.table("All Roles:", res); 
+    startApp();
+    })
+}
 
   function addEmployee () {
     //   console.log("adding an employee");
