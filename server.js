@@ -19,7 +19,46 @@ var connection = mysql.createConnection({
 connection.connect(function(err) {
     if (err) throw err;
     // run the start function after the connection is made to prompt the user
-    start();
+    startApp();
   });
 
-  
+  //intial prompt and switch cases, depending on selection
+  function startApp (){
+      inquirer
+      .prompt({
+          name: "selection",
+          type: "list",
+          message: "What would you like to do today?",
+          choices: [
+              "View All Employees",
+              "View All Departments",
+              "View All Roles",
+              "Add an Employee",
+              "Add a Department",
+              "Add a Role", 
+              "Update an Employee Role",
+              "Exit"
+          ]
+      }).then(function (answer){
+          switch (answer.selections) {
+              case "View All Employees":
+                  viewEmployees();
+                  break;
+                case "View All Departments":
+                    viewDepartments();
+                    break;
+                case "Add an Employee",
+                    addEmployee():
+                    break;
+                case "Add a Role":
+                    addRole();
+                    break;
+                case "Update an Employee Role",
+                    updateRole():
+                    break;
+                case "Exit":
+                    connection.end();
+                    break;
+          }
+      })
+  }
