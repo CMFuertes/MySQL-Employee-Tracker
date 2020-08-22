@@ -50,8 +50,11 @@ connection.connect(function(err) {
                 case "View All Roles":
                     viewRoles ();
                     break;
-                case "Add an Employee",
-                    addEmployee():
+                case "Add an Employee":
+                    addEmployee();
+                    break;
+                case "Add a Department":
+                    addDepartment();
                     break;
                 case "Add a Role":
                     addRole();
@@ -150,6 +153,30 @@ function viewRoles() {
                     startApp();
                 }
             )
+        })
+    })
+  }
+
+  function addDepartment () {
+    inquirer.prompt([
+        {
+            name: "new_dept",
+            type: "input",
+            message: "What is the name of the new deparment?"
+        }
+    ])
+    .then(function (answer) {
+        connection.query(
+            "INSERT INTO deparment SET ?",
+            {
+                name: answer.new_dept
+            }
+        );
+        var query = "SELECT * FROM department";
+        connection.query(query, function(err, res) {
+            if(err)throw err;
+            console.table("All Departments:", res);
+            startApp();
         })
     })
   }
