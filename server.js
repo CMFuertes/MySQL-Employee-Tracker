@@ -1,5 +1,6 @@
 var mysql = require("mysql");
 var inquirer = require("inquirer");
+require('console.table');
 
 var connection = mysql.createConnection({
     host: "localhost",
@@ -40,8 +41,8 @@ connection.connect(function(err) {
               "Exit"
           ],
       }).then(function (answer){
-        console.log(answer, 'ANSWER');
-        console.log(answer.selection, 'ANSWER SELECTIONS');
+        // console.log(answer, 'ANSWER');
+        // console.log(answer.selection, 'ANSWER SELECTIONS');
           switch (answer.selection) {
               case "View All Employees":
                   viewEmployees();
@@ -76,7 +77,7 @@ connection.connect(function(err) {
 
 
   function viewEmployees() {
-      console.log("You are viewing employees! oh wow!");
+    //   console.log("You are viewing employees! oh wow!");
   	var query = "SELECT * FROM employee";
     connection.query(query, (err, res) => {
     if (err) throw err;
