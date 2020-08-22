@@ -230,3 +230,61 @@ function viewRoles() {
          })
     })
 }
+
+function updateRole (){
+    var roleQuery = "SELECT * FROM role;";
+    var deparmentQuery = "SELECT * FROM deparment;";
+
+    connection.query(roleQuery, function (err, roles) {
+        if (err) throw err;
+    connection.query(deparmentQuery, function (err, departments){
+        if (err) throw err;
+        inquirer.prompt([
+            {
+                name: "new_role",
+                type: "rawlist", 
+                choices: function () {
+                    var roleArray = [];
+                    for (var i = 0; i < roles.length; i++){
+                        roleArray.push(roles[i].title);
+                    }
+                    return roleArray;
+                },
+                message: "Choose a role you wish to update"
+            },
+            {
+                name: "new_salary",
+                type: "input",
+                message: "What is the new salary?"
+            },
+            {
+                name: "department",
+                type: "rawlist",
+                choices: function() {
+                    var deptArray = [];
+                    for (var i = 0; i < roles.length; i++){
+                        deptArray.push(deparments[i].name);
+                    }
+                    return deptArray;
+                },
+                message: "Which department does this role belong to?"
+            },
+        ]).then (function (result) {
+            for (var i = 0; i < departments.length; i++) {
+                if (deparments[i].name === result.deparment) {
+                    result.deparment_id = deparments[i].id;
+                }
+            }
+            connection.query("UPDATE role SET title=?,salary= ? WHERE department_id= ?", [
+                { title: result.new_role },
+                { salary: result.new_salary },
+                { department_id: result.department_id }
+            ], function (err) {
+                if (err) throw err;
+                console.table("Role Successfuly Updated!");
+                startApp()
+            });
+        })
+    })
+})
+}
