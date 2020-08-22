@@ -23,7 +23,7 @@ connection.connect(function(err) {
   });
 
   //intial prompt and switch cases, depending on selection
-  function startApp (){
+  const startApp = () => {
       inquirer
       .prompt({
           name: "selection",
@@ -38,7 +38,7 @@ connection.connect(function(err) {
               "Add a Role", 
               "Update an Employee Role",
               "Exit"
-          ]
+          ],
       }).then(function (answer){
           switch (answer.selections) {
               case "View All Employees":
@@ -61,4 +61,32 @@ connection.connect(function(err) {
                     break;
           }
       })
+  }
+
+
+  //functions
+
+
+//   function viewEmployees(){
+//       console.log("You are viewing employees! oh wow!");
+//   }
+
+  function addEmployee () {
+    //   console.log("adding an employee");
+    coconnection.query("SELECT * FROM role", function (err, res) {
+        if (err) throw err;
+        inquirer.prompt([
+            {
+            name: "first_name",
+            type: "input",
+            message: "What is the empployee's first name?",
+            },
+            {
+            name: "last_name",
+            type: "input", 
+            message: "What is the employee's last name?"
+            },
+
+        ])
+    })
   }
