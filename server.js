@@ -40,7 +40,9 @@ connection.connect(function(err) {
               "Exit"
           ],
       }).then(function (answer){
-          switch (answer.selections) {
+        console.log(answer, 'ANSWER');
+        console.log(answer.selection, 'ANSWER SELECTIONS');
+          switch (answer.selection) {
               case "View All Employees":
                   viewEmployees();
                   break;
