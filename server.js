@@ -180,3 +180,53 @@ function viewRoles() {
         })
     })
   }
+
+  function addRole() {
+    connection.query("SELECT * FROM role", function (err, res) {
+        if (err) throw err;
+        inquirer.prompt ([
+            {
+                name: "new_role",
+                type: "input",
+                message: "What is the name of this new role?"
+            },
+            {
+                name: "salary",
+                type: "input",
+                message: "How much is the salary of this position?"
+            },
+            {
+                name: "deptChoice",
+                type: "list",
+                choices: function() {
+                    var deptArray = [];
+                    for (var i = 0; i < res.length; i++){
+                        deptArray.push(res[i].name);
+                    }
+                    return deptArray;
+                },
+            }
+        ])
+        .then(function (answer) {
+            var deptID;
+            for (var i = 0; i < res.length; i++) {
+                if (res[i].name == answer.deptChoice) {
+                    deptID = res[i].id;
+                }
+            }
+            connection.query(
+                "INSERT INTO role SET ?",
+                {
+                    title: answer.new_role,
+                    salary: answer.salary,
+                    department_id: deptID
+                },
+                function (err, res) {
+                    if(err)throw err;
+                    console.log("Your new role has been added.");
+                    startApp();
+                }
+            )
+         })
+    })
+}
