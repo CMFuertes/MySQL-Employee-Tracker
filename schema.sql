@@ -5,7 +5,7 @@ USE etracker_db;
 
 CREATE TABLE department(
   id INT NOT NULL AUTO_INCREMENT,
-  departmentName VARCHAR(30) NOT NULL,
+  department_mame VARCHAR(30) NOT NULL,
   PRIMARY KEY (id)
 );
 
