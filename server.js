@@ -187,6 +187,7 @@ function viewRoles() {
   function addRole() {
     connection.query("SELECT * FROM role", function (err, res) {
         if (err) throw err;
+        // console.log(res, 'RES')
         inquirer.prompt ([
             {
                 name: "new_role",
@@ -197,20 +198,25 @@ function viewRoles() {
                 name: "salary",
                 type: "input",
                 message: "How much is the salary of this position?"
+                
             },
             {
                 name: "deptChoice",
                 type: "list",
+                message: "Which deparment does this role belong to?",
                 choices: function() {
                     var deptArray = [];
                     for (var i = 0; i < res.length; i++){
                         deptArray.push(res[i].name);
                     }
                     return deptArray;
+                    
+                    
                 },
             }
         ])
         .then(function (answer) {
+            console.log(answer, 'ANSWER')
             var deptID;
             for (var i = 0; i < res.length; i++) {
                 if (res[i].name == answer.deptChoice) {
@@ -265,7 +271,7 @@ function updateRole (){
                 type: "rawlist",
                 choices: function() {
                     var deptArray = [];
-                    for (var i = 0; i < roles.length; i++){
+                    for (var i = 0; i < role.length; i++){
                         deptArray.push(department[i].name);
                     }
                     return deptArray;
