@@ -33,7 +33,7 @@ MySQL-Employee-Tracker
 
 The assignment was to design a database schema containing three tables: department, role and employee. Then to build a command line application that allowed users to add deparments, roles and employess. View deparments roles and employees. As well as update employee roles. 
 
-Link to the video can be found here : https://drive.google.com/file/d/1Lhxxn9syg3TzYe9T7_JTGfUmIU5qKT9t/view
+Link to the video how to use the application can be found here : https://drive.google.com/file/d/1Lhxxn9syg3TzYe9T7_JTGfUmIU5qKT9t/view
 
 ## Installation
 
