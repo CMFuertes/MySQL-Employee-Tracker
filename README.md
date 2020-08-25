@@ -39,6 +39,10 @@ Link to the video how to use the application can be found here : https://drive.g
 
 In order to successfully run the application after cloning the repo, users are required to yarn add: mysql, inquirer, console.table, express, and nodemon. 
 
+Users are also encouraged to run MySql Workbench in order to run the schema.sql, as well as seed.sql in order to retrieve the company data in the application. 
+
+A visual direction can be found in the video link listed above. 
+
 ## Usage
 
 Users can utilize this application in order to keep track of employees, their roles, and departments within their company. As well as easily keep track of salary changes.
