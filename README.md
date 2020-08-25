@@ -29,9 +29,11 @@ cristhal.fuertes@gmail.com
 
 MySQL-Employee-Tracker
 
+https://github.com/CMFuertes/MySQL-Employee-Tracker
+
 ## Description
 
-![Project gif]()
+![Preview gif](https://github.com/CMFuertes/MySQL-Employee-Tracker/blob/master/assets/gifpreview.gif)
 
 The assignment was to design a database schema containing three tables: department, role and employee. Then to build a command line application that allowed users to add deparments, roles and employess. View deparments roles and employees. As well as update employee roles. 
 
