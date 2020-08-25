@@ -62,8 +62,8 @@ connection.connect(function(err) {
                 case "Add a Role":
                     addRole();
                     break;
-                case "Update an Employee Role",
-                    updateRole():
+                case "Update an Employee Role":
+                    updateRole();
                     break;
                 case "Exit":
                     exit();
@@ -185,7 +185,8 @@ function viewRoles() {
   }
 
   function addRole() {
-    connection.query("SELECT * FROM role", function (err, res) {
+    connection.query("SELECT * FROM department", function (err, res) {
+        // console.log(res);
         if (err) throw err;
         // console.log(res, 'RES')
         inquirer.prompt ([
@@ -209,6 +210,7 @@ function viewRoles() {
                     for (var i = 0; i < res.length; i++){
                         deptArray.push(res[i].name);
                     }
+                    // console.log(deptArray);
                     return deptArray;
                     
                     
@@ -243,8 +245,8 @@ function viewRoles() {
 function updateRole (){
     var roleQuery = "SELECT * FROM role;";
     var departmentQuery = "SELECT * FROM department;";
-
-    connection.query(roleQuery, function (err, roles) {
+    
+    connection.query(roleQuery, function (err, role) {
         if (err) throw err;
     connection.query(departmentQuery, function (err, department){
         if (err) throw err;
@@ -271,7 +273,7 @@ function updateRole (){
                 type: "rawlist",
                 choices: function() {
                     var deptArray = [];
-                    for (var i = 0; i < role.length; i++){
+                    for (var i = 0; i < department.length; i++){
                         deptArray.push(department[i].name);
                     }
                     return deptArray;
@@ -279,15 +281,16 @@ function updateRole (){
                 message: "Which department does this role belong to?"
             },
         ]).then (function (result) {
-            for (var i = 0; i < department.length; i++) {
-                if (department[i].name === result.department) {
-                    result.department_id = department[i].id;
+            var roleID = 0;
+            for (var i = 0; i < role.length; i++) {
+                if (role[i].title === result.new_role) {
+                    roleID = role[i].id;
                 }
             }
-            connection.query("UPDATE role SET title=?,salary= ? WHERE department_id= ?", [
-                { title: result.new_role },
-                { salary: result.new_salary },
-                { department_id: result.department_id }
+            connection.query("UPDATE role SET title=?,salary= ? WHERE id= ?", [
+                result.new_role,
+                result.new_salary,
+                roleID
             ], function (err) {
                 if (err) throw err;
                 console.table("Role Successfuly Updated!");
