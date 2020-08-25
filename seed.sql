@@ -23,4 +23,3 @@ VALUES ("Victoria", "Perez", 1, 1),
         ("Brandon", "Mejias", 8, null),
         ("Kelly", "Dender", 9, 4);
         
-
