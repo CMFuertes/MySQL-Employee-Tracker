@@ -41,8 +41,7 @@ connection.connect(function(err) {
               "Exit"
           ],
       }).then(function (answer){
-        // console.log(answer, 'ANSWER');
-        // console.log(answer.selection, 'ANSWER SELECTIONS');
+
           switch (answer.selection) {
               case "View All Employees":
                   viewEmployees();
@@ -77,7 +76,6 @@ connection.connect(function(err) {
 
 
   function viewEmployees() {
-    //   console.log("You are viewing employees! oh wow!");
   	var query = "SELECT * FROM employee";
     connection.query(query, (err, res) => {
     if (err) throw err;
@@ -88,7 +86,6 @@ connection.connect(function(err) {
 }
 
 function viewDepartments() {
-	// console.log("You are viewing departments");
     connection.query("SELECT * FROM department", (err, res) => {
     if (err) throw err;
     console.log(`You are viewing ${res.length} departments`);
@@ -98,7 +95,6 @@ function viewDepartments() {
 }
 
 function viewRoles() {
-	// console.log("You are viewing roles");
     connection.query("SELECT * FROM role", (err, res) => {
     if (err) throw err;
     console.log(`You are viewing ${res.length} roles`);
@@ -108,7 +104,6 @@ function viewRoles() {
 }
 
   function addEmployee () {
-    //   console.log("adding an employee");
     connection.query("SELECT * FROM role", function (err, res) {
         if (err) throw err;
         inquirer.prompt([
@@ -186,9 +181,8 @@ function viewRoles() {
 
   function addRole() {
     connection.query("SELECT * FROM department", function (err, res) {
-        // console.log(res);
         if (err) throw err;
-        // console.log(res, 'RES')
+
         inquirer.prompt ([
             {
                 name: "new_role",
@@ -210,7 +204,7 @@ function viewRoles() {
                     for (var i = 0; i < res.length; i++){
                         deptArray.push(res[i].name);
                     }
-                    // console.log(deptArray);
+
                     return deptArray;
                     
                     
