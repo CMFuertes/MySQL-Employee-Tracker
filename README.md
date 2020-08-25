@@ -1,4 +1,4 @@
-# MySql Employee Tracker [NPM](https://img.shields.io/npm/l/sta)
+# MySql Employee Tracker ![NPM](https://img.shields.io/npm/l/sta)
 
 ## Table Of Contents 
 
@@ -32,6 +32,8 @@ MySQL-Employee-Tracker
 ## Description
 
 The assignment was to design a database schema containing three tables: department, role and employee. Then to build a command line application that allowed users to add deparments, roles and employess. View deparments roles and employees. As well as update employee roles. 
+
+Link to the video can be found here : 
 
 ## Installation
 
